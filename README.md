@@ -86,7 +86,3 @@ Per domande sul corso o sul materiale, contattami a: **daniecerri@gmail.com**
 ## 📄 Licenza
 
 Questo materiale è distribuito con licenza [MIT/CC-BY/altro] - sentiti libero di usarlo per scopi educativi.
-
----
-
-**Buon apprendimento! 🐍**
