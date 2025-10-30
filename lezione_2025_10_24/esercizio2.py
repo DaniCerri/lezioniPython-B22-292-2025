@@ -1,6 +1,8 @@
 # Lanciamo 8 dadi (D20 -> Il dado ha 20 facce) ed eliminiamo i lanci massimo e minimo
 
 import random # libreria per utilizzare e ottenere valori casuali
+from urllib.parse import scheme_chars
+
 lanci = []  # Inizializziamo una lista vuota
 FACCE = 20  # Numero di facce del dado
 N_LANCI = 8  # Numero di lanci del dado
@@ -40,7 +42,19 @@ print(f"Lanci rimasti: {lanci}")
 media = sum(lanci) / len(lanci)
 print(f"Lancio medio: {media:.2f}")
 
-# TODO: Calcolare la deviazione standard (senza usare la funzione di math)
+scarti_quadratici = []
+for lancio in lanci:
+    scarti_quadratici.append((lancio - media) ** 2)
+
+# totale_scarti = 0
+# for lancio in lanci:
+#     totale_scarti += (lancio - media) ** 2
+
+varianza = sum(scarti_quadratici) / len(lanci)
+# varianza = totale_scarti / len(lanci)
+
+std_dev = varianza ** 0.5
+
 
 
 
