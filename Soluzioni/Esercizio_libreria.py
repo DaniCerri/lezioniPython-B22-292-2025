@@ -19,9 +19,23 @@ def genere_piu_venduto(dizionario: dict) -> str:
     :return: genere, str
     """
     # 1. Dobbiamo calcolare quante vendite ha fatto ogni genere
+    vendite = {}  # Creiamo un dizionario vuoto in cui mettere i totali
+    for genere, dati in dizionario.items():  # Per ogni genere e dati corrispondenti
+        # Andiamo a creare nel dizionario vendite un nuovo campo con chiave il genere
+        # corrente e valore la somma delle sue vendite
+        vendite[genere] = sum(dati)
+
     # 2. Cerchiamo il genere con il valore più alto
+    # Scegliamo un genere a caso e "fingiamo" che sia il massimo
+    genere_massimo = list(vendite.keys())[0]
+    for genere, tot_vendite in vendite.items():  # Per ogni genere e totale vendite
+        # Se il dizionario alla chiave del massimo è minore del valore attuale
+        if vendite[genere_massimo] < tot_vendite:
+            # Vuol dire che abbiamo trovato il genere a cui si trova il massimo (fin'ora)
+            genere_massimo = genere
+
     # 3. Restituiamo il genere trovato
-    ...
+    return genere_massimo
 
 diz_vendite = {
     ### Dati delle vendite (ultimi 6 mesi)
