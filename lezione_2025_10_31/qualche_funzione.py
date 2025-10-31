@@ -14,7 +14,7 @@ def separatore(lunghezza: int, carattere: str, titolo: str):
     output = carattere * (lunghezza // 2)
     output += f" {titolo} "
     output += carattere * (lunghezza // 2)
-    print(output)
+    return output
 
 def calc_std_dev(lista: list[int]) -> float:
     """
