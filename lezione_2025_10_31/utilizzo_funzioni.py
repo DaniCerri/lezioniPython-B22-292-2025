@@ -18,7 +18,7 @@ def report(dizionario_record: dict) -> str:
     massimo = qualche_funzione.calc_massimo(dizionario_record['valori'])
     separatore = qualche_funzione.separatore(50, "-", dizionario_record['nome'])
 
-    stringa_out = separatore
+    stringa_out = f"{separatore} \n"
     stringa_out += f"Media: {media:.2f} \n"  # Il \n serve per andare a capo
     stringa_out += f"Std Dev: {std_dev:.2f} \n"  # Il \n serve per andare a capo
     stringa_out += f"Massimo: {massimo:.2f} \n"  # Il \n serve per andare a capo
@@ -39,3 +39,7 @@ dati = [
         "valori": [1200, 1350, 1500, 1420, 1600, 1580]
     }
 ]
+
+for record in dati:  # Per ogni record del nostro dizionario
+    report_dato = report(record)  # Facciamo un report completo
+    print(report_dato)
