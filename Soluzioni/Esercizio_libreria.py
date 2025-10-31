@@ -67,7 +67,6 @@ lista_mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile',
               'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
 
 # 2. Facciamo un dizionario chiave-valore
-
 diz_vendite = {
     "Gialli": [45, 9999, 38, 61, 49, 55, 12, 45, 76, 32, 323, 34, 2323, 23, 36, 8, 6, 575, 56, 90],
     "Romanzi": [78, 82, 91, 88, 76, 85, 12, 45, 76, 32, 323, 34, 12, 23, 36, 8, 6, 575, 56, 90],
