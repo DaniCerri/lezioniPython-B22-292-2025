@@ -43,6 +43,58 @@ def fascia_piu_frequentata(corso: dict) -> str:
     # 3. Restituiamo la fascia oraria trovata
     return fascia_migliore
 
+# 4. Implementa una funzione `corso_piu_popolare()` che restituisce il nome del corso con il
+# maggior numero totale di partecipanti (sommando tutte le fasce orarie e tutti i giorni)
+def corso_piu_popolare(dizionario: dict) -> str:
+    # 1. Calcoliamo l'affluenza totale per ogni corso
+    diz_somme = {}  # Sarà il dizionario in cui salviamo le affluenze totali
+    for corso, affluenze in dizionario.items():
+        for affluenza_oraria in affluenze.values():  # Per ogni lista di affluenza (per fascia oraria)
+            somma = sum(affluenza_oraria)  # Calcoliamo l'affluenza totale di questa fascia oraria
+
+            # Cerchiamo di ottenere il totale parziale del corso di cui stiamo calcolando l'affluenza totale
+            # Se non troviamo la chiave corrispondente al corso, vuol dire che è la prima volta che cerchiamo
+            # di aggiungere al nostro totale parziale del corso, infatti di default [se non c'è la chiave]
+            # restituiamo uno zero
+            totale_parziale = diz_somme.get(corso, 0)
+
+            totale_parziale += somma  # Aggiungiamo la somma della fascia oraria attuale al totale parziale
+            diz_somme[corso] = totale_parziale  # Salviamo il totale parziale nel dizionario delle somme
+            # Se la chiave con il corso attuale ancora non c'è, viene creata la coppia chiave - totale parziale
+
+    # 2. Troviamo il corso con affluenza maggiore
+    corso_migliore = list(diz_somme.keys())[0]  # Prendiamo un corso a caso e decidiamo che sia
+    # il migliore PROVVISORIO
+
+    for corso, affluenza_totale in diz_somme.items():  # Per ogni coppia corso-affluenza totale
+        # Se l'affluenza del corso attuale è maggiore dell'affluenza del corso migliore fin'ora
+        if affluenza_totale > diz_somme[corso_migliore]:
+            corso_migliore = corso  # Abbiamo trovato il nuovo corso migliore fin'ora
+
+    # Al termine del for, il corso che rimane come migliore sarà il migliore di tutti
+    return corso_migliore
+
+# 5. Implementa una funzione `giorno_migliore(corso, fascia_oraria)` che restituisce il giorno
+# (posizione 0-4) con più partecipanti per quella combinazione corso-fascia
+def giorno_migliore(corso: dict, fascia_oraria: str) -> int:
+    dati = corso[fascia_oraria]  # Prendiamo i dati del corso alla fascia oraria richiesta -> lista di interi
+    posizione_max = 0  # Decidiamo provvisoriamente di assegnare il massimo alla posizione 0 (primo elemento)
+    for i in range(len(dati)):  # Per ogni indice fino alla lunghezza della lista (esclusa)
+        # Se l'elemento della lista alla posizione attuale [i] è maggiore dell'elemento della lista
+        # alla posizione del massimo (fin'ora) [posizione_max]
+        if dati[i] > dati[posizione_max]:
+            posizione_max = i  # Abbiamo trovato la nuova posizione del massimo
+
+    return posizione_max
+
+
+# 6. Implementa una funzione `analisi_completa()` che stampa un report con:
+#    - Il corso più popolare in assoluto
+#    - Per ogni corso, quale fascia oraria è più frequentata
+#    - La media generale di partecipanti per ogni fascia oraria (considerando tutti i corsi)
+
+
+
 diz_affluenza = {
     "Yoga": {
         "Mattina": [12, 15, 13, 14, 16],
@@ -77,3 +129,9 @@ if __name__ == "__main__":
 
     migliore = fascia_piu_frequentata(diz_affluenza['Yoga'])
     print(f"La fascia migliore per Yoga è {migliore}")
+
+    miglior_corso = corso_piu_popolare(diz_affluenza)
+    print(f"Miglior corso: {miglior_corso}")
+
+    giorno_migliore(diz_affluenza['Yoga'], 'Mattina')
+    print(diz_affluenza['Yoga'])
