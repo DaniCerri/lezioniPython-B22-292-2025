@@ -87,13 +87,41 @@ def giorno_migliore(corso: dict, fascia_oraria: str) -> int:
 
     return posizione_max
 
-
 # 6. Implementa una funzione `analisi_completa()` che stampa un report con:
 #    - Il corso più popolare in assoluto
 #    - Per ogni corso, quale fascia oraria è più frequentata
 #    - La media generale di partecipanti per ogni fascia oraria (considerando tutti i corsi)
+def analisi_completa(dizionario: dict) -> str:
+    """
+    Funzione che prende un dizionario con le affluenze a dei corsi e restituisce un report completo in formato str.
+    :param dizionario: Dizionario di affluenza
+    :return: report, str
+    """
+    report = "-" * 50 + "Report sui corsi" + "-" * 50  # Inizializziamo la stringa del nostro report con il titolo
+    report += "\n"
 
+    # 1. Trovare il corso più frequentato
+    miglior_corso = corso_piu_popolare(dizionario)
+    # Aggiungiamo il risultato al nostro report
+    report += f"Miglior corso: {miglior_corso}\n\n"
 
+    # 2. Per ogni corso trovare la migliore fascia oraria
+    report += f"Migliore fascia oraria per ogni corso\n"
+    for nome_corso, dati_corso in dizionario.items():
+        fascia_migliore = fascia_piu_frequentata(dati_corso)
+        report += f" - {nome_corso}: {fascia_migliore}\n"
+
+    report += "\n"
+
+    # 3. Per ogni corso calcolare la media di affluenza per ogni fascia oraria
+    report += f"Media delle fasce orarie: {miglior_corso}\n"
+    for nome_corso, dati_corso in dizionario.items():
+        report += f" * {nome_corso}: \n"
+        for nome_fascia in dati_corso.keys():
+            media_fascia = media_partecipanti(nome_corso, dati_corso, nome_fascia)
+            report += f"  - Media {nome_fascia}: {media_fascia:.2f}\n"
+
+    return report
 
 diz_affluenza = {
     "Yoga": {
@@ -124,14 +152,17 @@ diz_affluenza = {
 }
 
 if __name__ == "__main__":
-    media = media_partecipanti("Pilates", diz_affluenza['Pilates'], 'Pomeriggio')
-    print(media)
+    # media = media_partecipanti("Pilates", diz_affluenza['Pilates'], 'Pomeriggio')
+    # print(media)
+    #
+    # migliore = fascia_piu_frequentata(diz_affluenza['Yoga'])
+    # print(f"La fascia migliore per Yoga è {migliore}")
+    #
+    # miglior_corso = corso_piu_popolare(diz_affluenza)
+    # print(f"Miglior corso: {miglior_corso}")
+    #
+    # giorno_migliore(diz_affluenza['Yoga'], 'Mattina')
+    # print(diz_affluenza['Yoga'])
 
-    migliore = fascia_piu_frequentata(diz_affluenza['Yoga'])
-    print(f"La fascia migliore per Yoga è {migliore}")
-
-    miglior_corso = corso_piu_popolare(diz_affluenza)
-    print(f"Miglior corso: {miglior_corso}")
-
-    giorno_migliore(diz_affluenza['Yoga'], 'Mattina')
-    print(diz_affluenza['Yoga'])
+    report = analisi_completa(diz_affluenza)
+    print(report)
