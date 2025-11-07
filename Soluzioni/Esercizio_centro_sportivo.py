@@ -97,7 +97,7 @@ def analisi_completa(dizionario: dict) -> str:
     :param dizionario: Dizionario di affluenza
     :return: report, str
     """
-    report = "-" * 50 + "Report sui corsi" + "-" * 50  # Inizializziamo la stringa del nostro report con il titolo
+    report = "-" * 50 + " Report sui corsi " + "-" * 50  # Inizializziamo la stringa del nostro report con il titolo
     report += "\n"
 
     # 1. Trovare il corso più frequentato
@@ -114,7 +114,7 @@ def analisi_completa(dizionario: dict) -> str:
     report += "\n"
 
     # 3. Per ogni corso calcolare la media di affluenza per ogni fascia oraria
-    report += f"Media delle fasce orarie: {miglior_corso}\n"
+    report += f"Media delle fasce orarie: \n"
     for nome_corso, dati_corso in dizionario.items():
         report += f" * {nome_corso}: \n"
         for nome_fascia in dati_corso.keys():
